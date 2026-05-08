@@ -43,6 +43,19 @@
         .social-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
         .social-link { background: #1a1a1a; color: white; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
 
+        /* FORMULARIO MODAL */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); justify-content: center; align-items: center; padding: 20px; z-index: 2000; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: 16px; max-width: 500px; width: 100%; padding: 25px; box-shadow: 0 16px 40px rgba(0,0,0,0.2); position: relative; }
+        .modal h2 { margin-top: 0; }
+        .modal p { color: #555; }
+        .modal .close-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 1.5rem; cursor: pointer; }
+        .modal form { display: grid; gap: 15px; margin-top: 15px; }
+        .modal input { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 10px; font-size: 1rem; }
+        .modal input:focus { outline: 2px solid #004d4d; border-color: #004d4d; }
+        .modal button[type="submit"] { width: 100%; background: #ff4757; color: white; border: none; padding: 12px 18px; border-radius: 10px; cursor: pointer; font-weight: 700; }
+        .modal small { color: #777; }
+
         /* TABLA DE SALIDAS EN BARCO */
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
@@ -62,7 +75,7 @@
     <section class="hero">
         <h1>Bienvenidos a InberTravel</h1>
         <p>Dos amigas viajeras listas para guiarte en tu próxima aventura.</p>
-        <a href="#contacto" class="btn" style="background: #ff4757;">¡Viaja con nosotras!</a>
+        <button id="openFormBtn" class="btn" style="background: #ff4757;">¡Viaja con nosotras!</button>
     </section>
 
     <div class="container">
@@ -150,6 +163,35 @@
         </table>
     </div>
 
+    <div class="modal-overlay" id="contactModal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="close-btn" id="closeModalBtn" aria-label="Cerrar formulario">×</button>
+            <h2 id="modalTitle">Déjanos tus datos</h2>
+            <p>Completa el formulario para que te contactemos sobre vacaciones y viajes especiales.</p>
+            <form id="bookingForm">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellidos" placeholder="Apellidos" required>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <input type="tel" name="whatsapp" placeholder="WhatsApp" required pattern="[0-9+\s-]{7,}" title="Ingresa tu número de WhatsApp">
+                <div style="display: grid; gap: 10px;">
+                    <label style="font-weight: 600; color: #333;">¿Viajo solo o acompañado?</label>
+                    <div style="display: flex; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="tipoViaje" value="solo" required>
+                            Solo
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="radio" name="tipoViaje" value="acompañado" required>
+                            Acompañado
+                        </label>
+                    </div>
+                </div>
+                <button type="submit">Enviar datos</button>
+                <small>Todos los campos son obligatorios.</small>
+            </form>
+        </div>
+    </div>
+
     <footer id="contacto">
         <p>&copy; 2026 InberTravel - Síguenos en nuestras redes sociales</p>
         <p>¿Quieres que te llevemos? Escríbenos y nosotros nos encargamos de todo.</p>
@@ -192,6 +234,31 @@
                 currentIndex += 1;
                 updateCarousel();
             }
+        });
+
+        const openFormBtn = document.getElementById('openFormBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const bookingForm = document.getElementById('bookingForm');
+
+        const toggleModal = (show) => {
+            contactModal.classList.toggle('active', show);
+            contactModal.setAttribute('aria-hidden', !show);
+        };
+
+        openFormBtn.addEventListener('click', () => toggleModal(true));
+        closeModalBtn.addEventListener('click', () => toggleModal(false));
+        contactModal.addEventListener('click', (event) => {
+            if (event.target === contactModal) {
+                toggleModal(false);
+            }
+        });
+
+        bookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('Gracias por enviar tus datos. Nos pondremos en contacto contigo pronto.');
+            bookingForm.reset();
+            toggleModal(false);
         });
 
         window.addEventListener('resize', updateCarousel);

@@ -24,6 +24,17 @@
         .card img { width: 100%; height: 200px; object-fit: cover; }
         .card-content { padding: 15px; }
 
+        /* CARRUSEL DE VIAJES */
+        .carousel { position: relative; overflow: hidden; margin-top: 40px; }
+        .carousel-track { display: flex; gap: 20px; transition: transform 0.4s ease; }
+        .carousel-card { min-width: 300px; flex: 0 0 300px; border: 1px solid #ddd; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 14px rgba(0,0,0,0.12); background: white; }
+        .carousel-card img { width: 100%; height: 220px; object-fit: cover; }
+        .carousel-card h3 { margin: 0 15px 10px; }
+        .carousel-card p { margin: 0 15px 15px; color: #555; }
+        .carousel-controls { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .carousel-button { background: #004d4d; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .carousel-button:disabled { opacity: 0.5; cursor: default; }
+
         /* SECCIÓN INCRUISES */
         .incruises-box { background: #f0f9ff; padding: 40px; border-radius: 15px; text-align: center; border: 2px dashed #007bff; margin-top: 30px; }
         .btn { background: #28a745; color: white; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
@@ -51,7 +62,7 @@
     </section>
 
     <div class="container">
-        <h2 text-align="center">Próximos Destinos Soñados</h2>
+        <h2 style="text-align: center;">Próximos Destinos Soñados</h2>
         <div class="grid">
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=500&q=60" alt="Caribe">
@@ -68,6 +79,39 @@
                 </div>
             </div>
         </div>
+
+        <section class="carousel-section">
+            <h2>Nuestros Viajes en Carrusel</h2>
+            <div class="carousel">
+                <div class="carousel-track" id="carouselTrack">
+                    <article class="carousel-card">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Playa tropical">
+                        <div class="card-content">
+                            <h3>Escapada Tropical</h3>
+                            <p>Disfruta de playas paradisíacas, atardeceres inolvidables y relajación total.</p>
+                        </div>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=600&q=80" alt="Montañas europeas">
+                        <div class="card-content">
+                            <h3>Aventura en Europa</h3>
+                            <p>Visita ciudades históricas, prueba gastronomía local y explora paisajes culturales.</p>
+                        </div>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="https://images.unsplash.com/photo-1519821172141-bf0984bd8bb3?auto=format&fit=crop&w=600&q=80" alt="Crucero de lujo">
+                        <div class="card-content">
+                            <h3>Crucero de Lujo</h3>
+                            <p>Navega con estilo en los mejores barcos mientras descubres puertos exclusivos.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-button" id="prevBtn" type="button">Anterior</button>
+                <button class="carousel-button" id="nextBtn" type="button">Siguiente</button>
+            </div>
+        </section>
 
         <div class="incruises-box">
             <h2>🚢 Sé parte del Club InCruises</h2>
@@ -95,7 +139,7 @@
                 <tr>
                     <td>Fiordos Noruegos</td>
                     <td>Barco de Expedición</td>
-                    <td>15 de Julio, 202</td>
+                    <td>15 de Julio, 2026</td>
                     <td><a href="#">Reservar</a></td>
                 </tr>
             </tbody>
@@ -107,5 +151,35 @@
         <p>¿Quieres que te llevemos? Escríbenos y nosotros nos encargamos de todo.</p>
     </footer>
 
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        const updateCarousel = () => {
+            const cardWidth = track.querySelector('.carousel-card').offsetWidth + 20;
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= track.children.length - 1;
+        };
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < track.children.length - 1) {
+                currentIndex += 1;
+                updateCarousel();
+            }
+        });
+
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
+    </script>
 </body>
 </html>

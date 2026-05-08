@@ -172,7 +172,6 @@
                 <input type="text" name="nombre" placeholder="Nombre" required>
                 <input type="text" name="apellidos" placeholder="Apellidos" required>
                 <input type="email" name="correo" placeholder="Correo electrónico" required>
-                <input type="tel" name="whatsapp" placeholder="WhatsApp" required pattern="[0-9+\s-]{7,}" title="Ingresa tu número de WhatsApp">
                 <div style="display: grid; gap: 10px;">
                     <label style="font-weight: 600; color: #333;">¿Viajo solo o acompañado?</label>
                     <div style="display: flex; gap: 20px;">
@@ -186,6 +185,17 @@
                         </label>
                     </div>
                 </div>
+                <div>
+                    <label for="destino" style="font-weight: 600; color: #333; display: block; margin-bottom: 8px;">¿Qué crucero te atrae?</label>
+                    <select name="destino" id="destino" required style="width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 10px; font-size: 1rem;">
+                        <option value="">Selecciona una región</option>
+                        <option value="Caribe">Caribe</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europa">Europa</option>
+                    </select>
+                </div>
+                <input type="text" name="lugaresCrucero" placeholder="¿Qué te gustaría recorrer exactamente?" required>
+                <input type="number" name="diasViaje" placeholder="¿Cuántos días te gustaría viajar?" required min="1" max="365">
                 <button type="submit">Enviar datos</button>
                 <small>Todos los campos son obligatorios.</small>
             </form>

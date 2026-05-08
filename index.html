@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InberTours - Viaja con Amigas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ES        open /workspaces/Inbertravel/index.htmlTILOS GENERALES */
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; color: #333; scroll-behavior: smooth; }
+        header { background: #004d4d; color: white; padding: 1rem; text-align: center; position: fixed; width: 100%; z-index: 1000; }
+        
+        /* SECCIÓN HERO (INTRODUCCIÓN) */
+        .hero { 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; height: 100vh; color: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 0 20px;
+        }
+
+        /* TARJETAS DE VIAJES (CARRUSEL SIMULADO) */
+        .container { padding: 50px 20px; max-width: 1200px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 15px; }
+
+        /* SECCIÓN INCRUISES */
+        .incruises-box { background: #f0f9ff; padding: 40px; border-radius: 15px; text-align: center; border: 2px dashed #007bff; margin-top: 30px; }
+        .btn { background: #28a745; color: white; padding: 10px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block; margin-top: 10px; }
+
+        /* TABLA DE SALIDAS EN BARCO */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #004d4d; color: white; }
+
+        footer { background: #222; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <strong>InberTours</strong> | Próximos Viajes | Club InCruises | Contacto
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Bienvenidos a InberTours</h1>
+        <p>Dos amigas viajeras listas para guiarte en tu próxima aventura.</p>
+        <a href="#contacto" class="btn" style="background: #ff4757;">¡Viaja con nosotras!</a>
+    </section>
+
+    <div class="container">
+        <h2 text-align="center">Próximos Destinos Soñados</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=500&q=60" alt="Caribe">
+                <div class="card-content">
+                    <h3>Caribe Mágico</h3>
+                    <p>7 días de sol y playa. ¡Relájate totalmente!</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=500&q=60" alt="Europa">
+                <div class="card-content">
+                    <h3>Crucero por el Mediterráneo</h3>
+                    <p>Cultura y lujo en un solo viaje.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="incruises-box">
+            <h2>🚢 Sé parte del Club InCruises</h2>
+            <p>Ahorra, reserva y viaja en los cruceros más lujosos del mundo. ¡Únete a nuestro equipo de socios!</p>
+            <a href="#" class="btn">Saber más del Club</a>
+        </div>
+
+        <h3>📅 Próximas Salidas Programadas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Destino</th>
+                    <th>Tipo de Barco</th>
+                    <th>Fecha de Salida</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bahamas Express</td>
+                    <td>Crucero de Lujo</td>
+                    <td>15 de Octubre, 2024</td>
+                    <td><a href="#">Reservar</a></td>
+                </tr>
+                <tr>
+                    <td>Fiordos Noruegos</td>
+                    <td>Barco de Expedición</td>
+                    <td>02 de Noviembre, 2024</td>
+                    <td><a href="#">Reservar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer id="contacto">
+        <p>&copy; 2024 InberTours - Síguenos en nuestras redes sociales</p>
+        <p>¿Quieres que te llevemos? Escríbenos y nosotros nos encargamos de todo.</p>
+    </footer>
+
+</body>
+</html>

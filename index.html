@@ -169,8 +169,8 @@
             <h2 id="modalTitle">Déjanos tus datos</h2>
             <p>Completa el formulario para que te contactemos sobre vacaciones y viajes especiales.</p>
             <form id="bookingForm">
-                <input type="text" name="nombre" placeholder="Nombre" required>
-                <input type="text" name="apellidos" placeholder="Apellidos" required>
+                <input type="text" name="nombre" placeholder="nombre" required>
+                <input type="text" name="apellidos" placeholder="apellidos" required>
                 <input type="email" name="correo" placeholder="Correo electrónico" required>
                 <div style="display: grid; gap: 10px;">
                     <label style="font-weight: 600; color: #333;">¿Viajo solo o acompañado?</label>
@@ -207,19 +207,20 @@
         <p>¿Quieres que te llevemos? Escríbenos y nosotros nos encargamos de todo.</p>
         <p>Este sitio fue creado por IO, creadora de contenido.</p>
         <div class="social-links">
-            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+            <a class="social-link" href="https://www.instagram.com/bernarditavalenciab?igsh=bzZjMjg1azJ0d3Bx" target="_blank" rel="noopener noreferrer">
                 📸 Instagram
             </a>
             <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
                 👍 Facebook
             </a>
-            <a class="whatsapp-btn" href="https://wa.me/5698835635?text=Hola%20InberTravel%2C%20quiero%20más%20información%20sobre%20los%20viajes" target="_blank" rel="noopener noreferrer">
+            <a class="whatsapp-btn" href="https://api.whatsapp.com/send?phone=56988375635&text=Hola%20InberTravel%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20viajes" target="_blank" rel="noopener noreferrer">
                 💬 WhatsApp
             </a>
         </div>
     </footer>
 
     <script>
+
         const track = document.getElementById('carouselTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
@@ -273,6 +274,60 @@
 
         window.addEventListener('resize', updateCarousel);
         updateCarousel();
+    </script>
+</body>
+<script type="module">
+        // 1. Importamos las librerías usando direcciones web (CDN) para que el navegador las entienda
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // 2. TUS CREDENCIALES (Copiadas de tu mensaje)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkVIQO44RfEduqA33_qJBePi8FlRLVWv4",
+            authDomain: "inbertravel.firebaseapp.com",
+            projectId: "inbertravel",
+            storageBucket: "inbertravel.firebasestorage.app",
+            messagingSenderId: "980510150155",
+            appId: "1:980510150155:web:cabd84801bc82a11a6810e",
+            measurementId: "G-WSKJXRS3QH"
+        };
+
+        // 3. Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase(app); // Esta es la conexión a la base de datos
+
+        // --- ABAJO DE ESTO VA TODA TU LÓGICA DE JAVASCRIPT ---
+        
+        // Aquí debes pegar la lógica del carrusel y el envío del formulario 
+        // que te proporcioné anteriormente.
+
+        const bookingForm = document.getElementById('bookingForm');
+
+        bookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            
+            const formData = new FormData(bookingForm);
+            const datosReserva = {
+                nombre: formData.get('nombre'),
+                apellidos: formData.get('apellidos'),
+                correo: formData.get('correo'),
+                destino: formData.get('destino'),
+                fechaRegistro: new Date().toISOString()
+            };
+
+            // Guardar en Firebase
+            push(ref(db, 'reservas'), datosReserva)
+                .then(() => {
+                    alert('¡Datos guardados con éxito en Firebase!');
+                    bookingForm.reset();
+                    document.getElementById('contactModal').classList.remove('active');
+                })
+                .catch((error) => console.error("Error:", error));
+        });
+
+        // (No olvides incluir aquí también el código del carrusel para que siga funcionando)
     </script>
 </body>
 </html>
